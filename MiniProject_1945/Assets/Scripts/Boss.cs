@@ -13,9 +13,14 @@ public class Boss : MonoBehaviour
 
 	void Start()
 	{
+		Invoke("Hide", 2);
 		StartCoroutine(BossMissle());
 		StartCoroutine(CircleFire());
 
+	}
+	void Hide()
+	{
+		GameObject.Find("BossWarning").SetActive(false);
 	}
 	
 	void Update()
@@ -72,4 +77,5 @@ public class Boss : MonoBehaviour
 			yield return new WaitForSeconds(attackRate);
 		}
 	}
+
 }
