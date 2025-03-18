@@ -1,5 +1,6 @@
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -15,11 +16,11 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private GameObject powerup;  //private 인스펙터에서 사용하는방법
 
-
-
 	//레이져
 	public GameObject lazer;
 	public float gValue = 0;
+
+	public Image Gage;
 
 	void Start()
 	{
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
 		else if (Input.GetKey(KeyCode.Space))
 		{
 			gValue += Time.deltaTime;
-
+			Gage.fillAmount = gValue;
 
 			if (gValue >= 1)
 			{
@@ -81,18 +82,10 @@ public class Player : MonoBehaviour
 			{
 				gValue = 0;
 			}
-
-
+			Gage.fillAmount = gValue;
 		}
 
-
-
-
-
-
 		transform.Translate(moveX, moveY, 0);
-
-
 
 		//캐릭터의 월드 좌표를 뷰포트 좌표계로 변환해준다.
 		Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
@@ -100,9 +93,6 @@ public class Player : MonoBehaviour
 		viewPos.y = Mathf.Clamp01(viewPos.y); //y값을 0이상, 1이하로 제한한다.
 		Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos);//다시월드좌표로 변환
 		transform.position = worldPos; //좌표를 적용한다.
-
-
-
 
 	}
 
@@ -120,8 +110,6 @@ public class Player : MonoBehaviour
 				GameObject go = Instantiate(powerup, transform.position, Quaternion.identity);
 				Destroy(go, 1);
 			}
-
-
 
 			//아이템 먹은 처리
 			Destroy(collision.gameObject);

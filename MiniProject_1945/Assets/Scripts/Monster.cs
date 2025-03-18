@@ -33,7 +33,8 @@ public class Monster : MonoBehaviour
 
 	private void OnBecameInvisible()
 	{
-		PoolManager.Instance.Return(gameObject);
+		//PoolManager.Instance.Return(gameObject);
+		Destroy(gameObject);
 	}
 
 	//미사일에 따른 데미지 입는 함수
@@ -43,7 +44,8 @@ public class Monster : MonoBehaviour
 		if(Hp <= 0)
 		{
 			ItemDrop();
-			PoolManager.Instance.Return(gameObject);
+			//PoolManager.Instance.Return(gameObject);
+			Destroy(gameObject);
 		}
 	}
 
