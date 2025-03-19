@@ -71,10 +71,20 @@ public class SpawnManager : MonoBehaviour
 		swi2 = false;
 		//두번째 몬스터 코루틴
 		StopCoroutine(RandomSpawn2());
+		StartCoroutine(Shake());
 
 		//보스
 		textBossWarning.SetActive(true);
 		Vector3 pos = new Vector3(0, 3.0f, 0);
 		Instantiate(Boss, pos, Quaternion.identity);
+	}
+
+	IEnumerator Shake()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			yield return new WaitForSeconds(0.2f);
+			CameraShake.instance.CameraShakeShow();
+		}
 	}
 }
